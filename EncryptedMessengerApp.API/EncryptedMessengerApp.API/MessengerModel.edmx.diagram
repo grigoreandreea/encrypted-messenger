@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1f69e9591b434bd9981eaf17f41a53a1" Name="Diagram1">
+        <EntityTypeShape EntityType="EncryptedMessengerModel.Group" Width="1.5" PointX="1.375" PointY="2.875" />
+        <EntityTypeShape EntityType="EncryptedMessengerModel.Message" Width="1.5" PointX="6.875" PointY="3.375" />
+        <EntityTypeShape EntityType="EncryptedMessengerModel.User" Width="1.5" PointX="2.375" PointY="5.625" />
+        <AssociationConnector Association="EncryptedMessengerModel.FK_Messages_Groups" />
+        <AssociationConnector Association="EncryptedMessengerModel.FK_Messages_Users" />
+        <AssociationConnector Association="EncryptedMessengerModel.FK_Messages_Users1" />
+        <AssociationConnector Association="EncryptedMessengerModel.GroupMembers" />
+        <AssociationConnector Association="EncryptedMessengerModel.UsersContacts" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

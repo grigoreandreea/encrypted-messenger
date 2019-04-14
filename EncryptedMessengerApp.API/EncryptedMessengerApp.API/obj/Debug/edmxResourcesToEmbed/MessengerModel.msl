@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EncryptedMessengerModelStoreContainer" CdmEntityContainer="EncryptedMessengerContext">
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="EncryptedMessengerModel.Group">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="EncryptedMessengerModel.Message">
+        <MappingFragment StoreEntitySet="Messages">
+          <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="IdGroupReceived" ColumnName="IdGroupReceived" />
+          <ScalarProperty Name="IdUserReceived" ColumnName="IdUserReceived" />
+          <ScalarProperty Name="IdUserSent" ColumnName="IdUserSent" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="EncryptedMessengerModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="GroupMembers" TypeName="EncryptedMessengerModel.GroupMembers" StoreEntitySet="GroupMembers">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="IdUser" />
+      </EndProperty>
+      <EndProperty Name="Group">
+        <ScalarProperty Name="Id" ColumnName="IdGroup" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UsersContacts" TypeName="EncryptedMessengerModel.UsersContacts" StoreEntitySet="UsersContacts">
+      <EndProperty Name="User1">
+        <ScalarProperty Name="Id" ColumnName="IdUserReceived" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="IdUserSent" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
