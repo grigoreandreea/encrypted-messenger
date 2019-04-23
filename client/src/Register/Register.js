@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import moment from 'moment';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 const styles = theme => ({
     container: {
@@ -36,19 +38,69 @@ class Register extends React.Component {
             lastName: '',
             birthDate: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            submitted: false,
+            successText: ''
+        }
+    }
+
+    componentDidMount() {
+        ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+            return value === this.state.password;
+        });
+
+        ValidatorForm.addValidationRule('isPhoneNumber', (value) => {
+            return value.length === 10 && !isNaN(value)
+        });
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.submitted) {
+            setTimeout(() => {
+                this.setState({
+                    submitted: false,
+                    successText: 'You have successfully created your account!'
+                })
+            }, 1500);
         }
     }
 
     render() {
         const {classes} = this.props;
+        const footerText = this.state.successText === ''
+            ? <React.Fragment>
+                Or
+                <Link to="/login" style={{textDecoration: 'none', padding: '0 4px', color: 'cornflowerblue'}}>
+                    Login
+                </Link>
+                if you already have an account!
+            </React.Fragment>
+            : <h3 style={{color: 'green'}}>
+                {this.state.successText}
+              </h3>;
+
         return (
-            <div className="register-wrapper">
+            <ValidatorForm className="register-wrapper" onSubmit={(event) => {
+                console.log(event);
+                event.preventDefault();
+                const url = `http://localhost:62421/api/users`;
+                const body = JSON.parse(JSON.stringify(this.state));
+                body.birthDate = moment(body.birthDate).format();
+                delete body.confirmPassword;
+                delete body.submitted;
+                axios.post(url, body)
+                    .then(response => {
+                        this.setState({
+                            submitted: true
+                        })
+                    });
+            }}>
+                {this.state.submitted &&  <LinearProgress variant="indeterminate" />}
                 <div className="margin-auto">
                     <div className="text-wrapper">
                         <h3>Register</h3>
                     </div>
-                    <TextField
+                    <TextValidator
                         label="First name"
                         className={classes.textField}
                         type="text"
@@ -63,9 +115,11 @@ class Register extends React.Component {
                                 firstName: ev.target.value
                             })
                         }}
+                        validators={['required']}
+                        errorMessages={['First name is required!']}
                     />
 
-                    <TextField
+                    <TextValidator
                         label="Last name"
                         className={classes.textField}
                         type="text"
@@ -80,9 +134,11 @@ class Register extends React.Component {
                                 lastName: ev.target.value
                             })
                         }}
+                        validators={['required']}
+                        errorMessages={['Last name is required!']}
                     />
 
-                    <TextField
+                    <TextValidator
                         label="Phone number"
                         className={classes.textField}
                         type="text"
@@ -97,9 +153,11 @@ class Register extends React.Component {
                                 phoneNumber: ev.target.value
                             })
                         }}
+                        validators={['isPhoneNumber']}
+                        errorMessages={['Phone number is required and must be a valid number!']}
                     />
 
-                    <TextField
+                    <TextValidator
                         label="Birth date"
                         className={classes.textField}
                         name="birthDate"
@@ -117,9 +175,11 @@ class Register extends React.Component {
                                 birthDate: ev.target.value
                             })
                         }}
+                        validators={['required']}
+                        errorMessages={['Birth date is required!']}
                     />
 
-                    <TextField
+                    <TextValidator
                         label="Password"
                         className={classes.textField}
                         type="password"
@@ -134,9 +194,11 @@ class Register extends React.Component {
                                 password: ev.target.value
                             })
                         }}
+                        validators={['required']}
+                        errorMessages={['Password is required!']}
                     />
 
-                    <TextField
+                    <TextValidator
                         label="Confirm password"
                         className={classes.textField}
                         type="password"
@@ -146,6 +208,8 @@ class Register extends React.Component {
                         variant="outlined"
                         style={{width: 270}}
                         value={this.state.confirmPassword}
+                        validators={['isPasswordMatch']}
+                        errorMessages={['Password must match!']}
                         onChange={(ev) => {
                             this.setState({
                                 confirmPassword: ev.target.value
@@ -157,29 +221,14 @@ class Register extends React.Component {
                             color="primary"
                             style={{marginTop: 24, width: 270, backgroundColor: 'cornflowerblue', marginLeft: 8}}
                             size="large"
-                            onClick={() => {
-                                const url = `http://localhost:62421/api/users`;
-                                const body = JSON.parse(JSON.stringify(this.state));
-                                body.birthDate = moment(body.birthDate).format();
-                                delete body.confirmPassword;
-                                axios.post(url, body)
-                                    .then(response => {
-                                        console.log('FROM server: ')
-                                        console.log(response)
-                                    })
-                            }}
-                    >
+                            type="submit">
                         REGISTER
                     </Button>
                 </div>
                 <div className="text-register-wrapper" style={{margin: 'auto', paddingBottom: 10}}>
-                    Or
-                    <Link to="/login" style={{textDecoration: 'none', padding: '0 4px', color: 'cornflowerblue'}}>
-                        Login
-                    </Link>
-                    if you already have an account!
+                    {footerText}
                 </div>
-            </div>
+            </ValidatorForm>
         )
     }
 }
