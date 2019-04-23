@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import {Link} from "react-router-dom";
+import './NavBar.css';
 
 const styles = {
   root: {
@@ -30,10 +32,17 @@ function ButtonAppBar(props) {
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            Encrypted Messenger
+          <Typography variant="h6"
+                      color="inherit"
+                      className={classes.grow}>
+            <div style={{cursor: 'pointer', padding: '0 12px', width: 200, margin: 'auto'}}
+                onClick={() => {window.location.pathname='/';}}>
+              Encrypted Messenger
+            </div>
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" onClick={() => {window.location.pathname='/login';}}>
+              Login
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
