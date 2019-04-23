@@ -24,9 +24,17 @@ const styles = theme => ({
 });
 
 class Login extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            phoneNumber: '',
+            password: ''
+        }
+    }
+
     render() {
         const {classes} = this.props;
-
         return (
             <div className="login-wrapper">
                 <div className="margin-auto">
@@ -43,6 +51,12 @@ class Login extends React.Component {
                         margin="normal"
                         variant="outlined"
                         style={{marginTop: 50, width: 270}}
+                        value={this.state.phoneNumber}
+                        onChange={(ev) => {
+                            this.setState({
+                                phoneNumber: ev.target.value
+                            })
+                        }}
                     />
 
                     <TextField
@@ -54,6 +68,12 @@ class Login extends React.Component {
                         margin="normal"
                         variant="outlined"
                         style={{width: 270}}
+                        value={this.state.password}
+                        onChange={(ev) => {
+                            this.setState({
+                                password: ev.target.value
+                            })
+                        }}
                     />
 
                     <Button variant="contained"

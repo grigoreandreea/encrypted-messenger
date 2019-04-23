@@ -24,9 +24,23 @@ const styles = theme => ({
 });
 
 class Login extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            phoneNumber: '',
+            firstName: '',
+            lastName: '',
+            birthDate: '',
+            password: '',
+            confirmPassword: ''
+        }
+    }
+
     render() {
         const {classes} = this.props;
-
+        console.log('state changed: ', this.state)
         return (
             <div className="register-wrapper">
                 <div className="margin-auto">
@@ -42,6 +56,12 @@ class Login extends React.Component {
                         margin="normal"
                         variant="outlined"
                         style={{width: 270}}
+                        value={this.state.firstName}
+                        onChange={(ev) => {
+                            this.setState({
+                                firstName: ev.target.value
+                            })
+                        }}
                     />
 
                     <TextField
@@ -53,6 +73,12 @@ class Login extends React.Component {
                         margin="normal"
                         variant="outlined"
                         style={{width: 270}}
+                        value={this.state.lastName}
+                        onChange={(ev) => {
+                            this.setState({
+                                lastName: ev.target.value
+                            })
+                        }}
                     />
 
                     <TextField
@@ -64,6 +90,12 @@ class Login extends React.Component {
                         margin="normal"
                         variant="outlined"
                         style={{width: 270}}
+                        value={this.state.phoneNumber}
+                        onChange={(ev) => {
+                            this.setState({
+                                phoneNumber: ev.target.value
+                            })
+                        }}
                     />
 
                     <TextField
@@ -78,6 +110,12 @@ class Login extends React.Component {
                         InputLabelProps={{
                             shrink: true,
                         }}
+                        value={this.state.birthDate}
+                        onChange={(ev) => {
+                            this.setState({
+                                birthDate: ev.target.value
+                            })
+                        }}
                     />
 
                     <TextField
@@ -89,6 +127,12 @@ class Login extends React.Component {
                         margin="normal"
                         variant="outlined"
                         style={{width: 270}}
+                        value={this.state.password}
+                        onChange={(ev) => {
+                            this.setState({
+                                password: ev.target.value
+                            })
+                        }}
                     />
 
                     <TextField
@@ -100,7 +144,14 @@ class Login extends React.Component {
                         margin="normal"
                         variant="outlined"
                         style={{width: 270}}
+                        value={this.state.confirmPassword}
+                        onChange={(ev) => {
+                            this.setState({
+                                confirmPassword: ev.target.value
+                            })
+                        }}
                     />
+
                     <Button variant="contained"
                             color="primary"
                             style={{marginTop: 24, width: 270, backgroundColor: 'cornflowerblue', marginLeft: 8}}
