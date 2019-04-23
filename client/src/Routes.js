@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import Login from "./Login/Login";
+import Register from "./Register/Register";
 
 class Routes extends Component {
     render() {
@@ -9,6 +11,8 @@ class Routes extends Component {
                     () => {
                         return (<h1>Welcome aboard!</h1>)}
                 }/>
+                <Route path="/login" exact strict component={Login}/>
+                <Route path="/register" exact strict component={Register}/>
             </div>
         );
     }

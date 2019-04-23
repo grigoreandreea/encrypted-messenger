@@ -1,0 +1,28 @@
+.register-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 680px;
+    background-color: white;
+    border: 1px solid #d1d7e2;
+    border-radius: 3px;
+}
+
+.margin-auto {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.text-wrapper {
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    color: #323e59;
+}
+
+.text-register-wrapper {
+    display: flex;
+    font-weight: 400;
+    color: #323e59;
+}
