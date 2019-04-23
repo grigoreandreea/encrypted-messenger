@@ -8,13 +8,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using EncryptedMessageApp.API;
+using EncryptedMessengerApp.API;
 
-namespace EncryptedMessageApp.API.Controllers
+namespace EncryptedMessengerApp.API.Controllers
 {
     public class GroupsController : ApiController
     {
-        private EncryptedMessengerContext db = new EncryptedMessengerContext();
+        private EncryptedMessengerEntities db = new EncryptedMessengerEntities();
 
         // GET: api/Groups
         public IQueryable<Group> GetGroups()

@@ -8,7 +8,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9EFDA1C4-E7C0-4C64-BDC1-6B7E450851BA}</ProjectGuid>
+    <ProjectGuid>{00387A53-804B-47C6-963A-E1332D809111}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -212,8 +212,8 @@
     <Content Include="Global.asax" />
     <Content Include="MessengerModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MessengerModel.Context.cs</LastGenOutput>
       <DependentUpon>MessengerModel.edmx</DependentUpon>
+      <LastGenOutput>MessengerModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="MessengerModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -321,9 +321,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50109</DevelopmentServerPort>
+          <DevelopmentServerPort>62421</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50109/</IISUrl>
+          <IISUrl>http://localhost:62421/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

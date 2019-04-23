@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace EncryptedMessageApp.API
+namespace EncryptedMessengerApp.API
 {
     public class BundleConfig
     {

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("EncryptedMessageApp.API")]
+[assembly: AssemblyTitle("EncryptedMessengerApp.API")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("EncryptedMessageApp.API")]
+[assembly: AssemblyProduct("EncryptedMessengerApp.API")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("67849b41-2b50-4159-ae9f-18efa5f279f1")]
+[assembly: Guid("07828170-96e8-4b2e-bd21-e097715b60c0")]
 
 // Version information for an assembly consists of the following four values:
 //

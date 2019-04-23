@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'F:\Roxi\Facultate\Anul2\Notite\Semestrul 2\MDS\EncryptedMessageApp.API\EncryptedMessageApp.API\MessengerModel.edmx'. 
+﻿// T4 code generation is enabled for model 'F:\Roxi\Facultate\Anul2\Notite\Semestrul 2\MDS\Proiect\EncryptedMessengerApp.API\EncryptedMessengerApp.API\MessengerModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

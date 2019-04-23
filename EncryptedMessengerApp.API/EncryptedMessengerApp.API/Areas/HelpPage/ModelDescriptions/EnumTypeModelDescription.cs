@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace EncryptedMessageApp.API.Areas.HelpPage.ModelDescriptions
+namespace EncryptedMessengerApp.API.Areas.HelpPage.ModelDescriptions
 {
     public class EnumTypeModelDescription : ModelDescription
     {

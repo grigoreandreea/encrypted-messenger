@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace EncryptedMessageApp.API.Areas.HelpPage
+namespace EncryptedMessengerApp.API.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

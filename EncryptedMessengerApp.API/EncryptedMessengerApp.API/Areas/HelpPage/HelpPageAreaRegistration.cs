@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace EncryptedMessageApp.API.Areas.HelpPage
+namespace EncryptedMessengerApp.API.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

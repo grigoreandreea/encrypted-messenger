@@ -8,13 +8,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using EncryptedMessageApp.API;
+using EncryptedMessengerApp.API;
 
-namespace EncryptedMessageApp.API.Controllers
+namespace EncryptedMessengerApp.API.Controllers
 {
     public class UsersController : ApiController
     {
-        private EncryptedMessengerContext db = new EncryptedMessengerContext();
+        private EncryptedMessengerEntities db = new EncryptedMessengerEntities();
 
         // GET: api/Users
         public IQueryable<User> GetUsers()
@@ -80,22 +80,7 @@ namespace EncryptedMessageApp.API.Controllers
             }
 
             db.Users.Add(user);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (UserExists(user.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
         }

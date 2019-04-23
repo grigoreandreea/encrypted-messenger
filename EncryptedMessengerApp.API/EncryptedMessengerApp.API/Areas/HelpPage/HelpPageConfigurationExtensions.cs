@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using EncryptedMessageApp.API.Areas.HelpPage.ModelDescriptions;
-using EncryptedMessageApp.API.Areas.HelpPage.Models;
+using EncryptedMessengerApp.API.Areas.HelpPage.ModelDescriptions;
+using EncryptedMessengerApp.API.Areas.HelpPage.Models;
 
-namespace EncryptedMessageApp.API.Areas.HelpPage
+namespace EncryptedMessengerApp.API.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

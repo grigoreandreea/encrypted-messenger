@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using EncryptedMessageApp.API.Areas.HelpPage.ModelDescriptions;
-using EncryptedMessageApp.API.Areas.HelpPage.Models;
+using EncryptedMessengerApp.API.Areas.HelpPage.ModelDescriptions;
+using EncryptedMessengerApp.API.Areas.HelpPage.Models;
 
-namespace EncryptedMessageApp.API.Areas.HelpPage.Controllers
+namespace EncryptedMessengerApp.API.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

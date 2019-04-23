@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1f69e9591b434bd9981eaf17f41a53a1" Name="Diagram1">
-        <EntityTypeShape EntityType="EncryptedMessengerModel.Group" Width="1.5" PointX="1.375" PointY="2.875" />
-        <EntityTypeShape EntityType="EncryptedMessengerModel.Message" Width="1.5" PointX="6.875" PointY="3.375" />
-        <EntityTypeShape EntityType="EncryptedMessengerModel.User" Width="1.5" PointX="2.375" PointY="5.625" />
-        <AssociationConnector Association="EncryptedMessengerModel.FK_Messages_Groups" />
-        <AssociationConnector Association="EncryptedMessengerModel.FK_Messages_Users" />
-        <AssociationConnector Association="EncryptedMessengerModel.FK_Messages_Users1" />
-        <AssociationConnector Association="EncryptedMessengerModel.GroupMembers" />
-        <AssociationConnector Association="EncryptedMessengerModel.UsersContacts" />
+      <Diagram DiagramId="93ec392d72b14449a46401e06cee61f3" Name="Diagram1">
+        <EntityTypeShape EntityType="EncryptedMessengerModel.Group" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EncryptedMessengerModel.Message" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EncryptedMessengerModel.User" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <AssociationConnector Association="EncryptedMessengerModel.FK_Messages_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="EncryptedMessengerModel.FK_Messages_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="EncryptedMessengerModel.FK_Messages_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="EncryptedMessengerModel.GroupMembers" ManuallyRouted="false" />
+        <AssociationConnector Association="EncryptedMessengerModel.UsersContacts" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EncryptedMessengerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="EncryptedMessengerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="GroupMembers">
           <Key>
             <PropertyRef Name="IdGroup" />
@@ -35,7 +35,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -170,43 +170,19 @@
             <End Role="UsersContacts" EntitySet="UsersContacts" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EncryptedMessengerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="EncryptedMessengerContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Groups" EntityType="EncryptedMessengerModel.Group" />
-          <EntitySet Name="Messages" EntityType="EncryptedMessengerModel.Message" />
-          <EntitySet Name="Users" EntityType="EncryptedMessengerModel.User" />
-          <AssociationSet Name="FK_Messages_Groups" Association="EncryptedMessengerModel.FK_Messages_Groups">
-            <End Role="Group" EntitySet="Groups" />
-            <End Role="Message" EntitySet="Messages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Messages_Users" Association="EncryptedMessengerModel.FK_Messages_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Message" EntitySet="Messages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Messages_Users1" Association="EncryptedMessengerModel.FK_Messages_Users1">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Message" EntitySet="Messages" />
-          </AssociationSet>
-          <AssociationSet Name="GroupMembers" Association="EncryptedMessengerModel.GroupMembers">
-            <End Role="Group" EntitySet="Groups" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="UsersContacts" Association="EncryptedMessengerModel.UsersContacts">
-            <End Role="User" EntitySet="Users" />
-            <End Role="User1" EntitySet="Users" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Group">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Messages" Relationship="EncryptedMessengerModel.FK_Messages_Groups" FromRole="Group" ToRole="Message" />
-          <NavigationProperty Name="Users" Relationship="EncryptedMessengerModel.GroupMembers" FromRole="Group" ToRole="User" />
+          <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_Groups" FromRole="Groups" ToRole="Messages" />
+          <NavigationProperty Name="Users" Relationship="Self.GroupMembers" FromRole="Groups" ToRole="Users" />
         </EntityType>
         <EntityType Name="Message">
           <Key>
@@ -216,126 +192,151 @@
           <Property Name="IdUserSent" Type="Int32" Nullable="false" />
           <Property Name="IdUserReceived" Type="Int32" />
           <Property Name="IdGroupReceived" Type="Int32" />
-          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SentDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Group" Relationship="EncryptedMessengerModel.FK_Messages_Groups" FromRole="Message" ToRole="Group" />
-          <NavigationProperty Name="User" Relationship="EncryptedMessengerModel.FK_Messages_Users" FromRole="Message" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="EncryptedMessengerModel.FK_Messages_Users1" FromRole="Message" ToRole="User" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_Messages_Groups" FromRole="Messages" ToRole="Groups" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Messages_Users" FromRole="Messages" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Messages_Users1" FromRole="Messages" ToRole="Users" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Messages" Relationship="EncryptedMessengerModel.FK_Messages_Users" FromRole="User" ToRole="Message" />
-          <NavigationProperty Name="Messages1" Relationship="EncryptedMessengerModel.FK_Messages_Users1" FromRole="User" ToRole="Message" />
-          <NavigationProperty Name="Groups" Relationship="EncryptedMessengerModel.GroupMembers" FromRole="User" ToRole="Group" />
-          <NavigationProperty Name="Users1" Relationship="EncryptedMessengerModel.UsersContacts" FromRole="User" ToRole="User1" />
-          <NavigationProperty Name="Users" Relationship="EncryptedMessengerModel.UsersContacts" FromRole="User1" ToRole="User" />
+          <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_Users" FromRole="Users" ToRole="Messages" />
+          <NavigationProperty Name="Messages1" Relationship="Self.FK_Messages_Users1" FromRole="Users" ToRole="Messages" />
+          <NavigationProperty Name="Groups" Relationship="Self.GroupMembers" FromRole="Users" ToRole="Groups" />
+          <NavigationProperty Name="Users1" Relationship="Self.UsersContacts" FromRole="Users" ToRole="Users1" />
+          <NavigationProperty Name="Users" Relationship="Self.UsersContacts" FromRole="Users1" ToRole="Users" />
         </EntityType>
         <Association Name="FK_Messages_Groups">
-          <End Type="EncryptedMessengerModel.Group" Role="Group" Multiplicity="0..1" />
-          <End Type="EncryptedMessengerModel.Message" Role="Message" Multiplicity="*" />
+          <End Role="Groups" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="Messages" Type="Self.Message" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Group">
+            <Principal Role="Groups">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Message">
+            <Dependent Role="Messages">
               <PropertyRef Name="IdGroupReceived" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Messages_Users">
-          <End Type="EncryptedMessengerModel.User" Role="User" Multiplicity="1" />
-          <End Type="EncryptedMessengerModel.Message" Role="Message" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Message" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="Users">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Message">
+            <Dependent Role="Messages">
               <PropertyRef Name="IdUserSent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Messages_Users1">
-          <End Type="EncryptedMessengerModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="EncryptedMessengerModel.Message" Role="Message" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Messages" Type="Self.Message" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="Users">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Message">
+            <Dependent Role="Messages">
               <PropertyRef Name="IdUserReceived" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="GroupMembers">
-          <End Type="EncryptedMessengerModel.Group" Role="Group" Multiplicity="*" />
-          <End Type="EncryptedMessengerModel.User" Role="User" Multiplicity="*" />
+          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
         </Association>
         <Association Name="UsersContacts">
-          <End Type="EncryptedMessengerModel.User" Role="User" Multiplicity="*" />
-          <End Type="EncryptedMessengerModel.User" Role="User1" Multiplicity="*" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <End Role="Users1" Type="Self.User" Multiplicity="*" />
         </Association>
+        <EntityContainer Name="EncryptedMessengerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Messages_Groups" Association="Self.FK_Messages_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Users" Association="Self.FK_Messages_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Users1" Association="Self.FK_Messages_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="GroupMembers" Association="Self.GroupMembers">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UsersContacts" Association="Self.UsersContacts">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Users1" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EncryptedMessengerModelStoreContainer" CdmEntityContainer="EncryptedMessengerContext">
+        <EntityContainerMapping StorageEntityContainer="EncryptedMessengerModelStoreContainer" CdmEntityContainer="EncryptedMessengerEntities">
           <EntitySetMapping Name="Groups">
             <EntityTypeMapping TypeName="EncryptedMessengerModel.Group">
               <MappingFragment StoreEntitySet="Groups">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Messages">
             <EntityTypeMapping TypeName="EncryptedMessengerModel.Message">
               <MappingFragment StoreEntitySet="Messages">
-                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="IdGroupReceived" ColumnName="IdGroupReceived" />
-                <ScalarProperty Name="IdUserReceived" ColumnName="IdUserReceived" />
-                <ScalarProperty Name="IdUserSent" ColumnName="IdUserSent" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdUserSent" ColumnName="IdUserSent" />
+                <ScalarProperty Name="IdUserReceived" ColumnName="IdUserReceived" />
+                <ScalarProperty Name="IdGroupReceived" ColumnName="IdGroupReceived" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="EncryptedMessengerModel.User">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="GroupMembers" TypeName="EncryptedMessengerModel.GroupMembers" StoreEntitySet="GroupMembers">
-            <EndProperty Name="User">
-              <ScalarProperty Name="Id" ColumnName="IdUser" />
-            </EndProperty>
-            <EndProperty Name="Group">
+            <EndProperty Name="Groups">
               <ScalarProperty Name="Id" ColumnName="IdGroup" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="Id" ColumnName="IdUser" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="UsersContacts" TypeName="EncryptedMessengerModel.UsersContacts" StoreEntitySet="UsersContacts">
-            <EndProperty Name="User1">
-              <ScalarProperty Name="Id" ColumnName="IdUserReceived" />
-            </EndProperty>
-            <EndProperty Name="User">
+            <EndProperty Name="Users">
               <ScalarProperty Name="Id" ColumnName="IdUserSent" />
+            </EndProperty>
+            <EndProperty Name="Users1">
+              <ScalarProperty Name="Id" ColumnName="IdUserReceived" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace EncryptedMessageApp.API.Areas.HelpPage.ModelDescriptions
+namespace EncryptedMessengerApp.API.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

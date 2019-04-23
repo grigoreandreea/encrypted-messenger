@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EncryptedMessageApp.API
+namespace EncryptedMessengerApp.API
 {
     using System;
     using System.Collections.Generic;

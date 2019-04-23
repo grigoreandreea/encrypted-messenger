@@ -1,4 +1,4 @@
-namespace EncryptedMessageApp.API.Areas.HelpPage.ModelDescriptions
+namespace EncryptedMessengerApp.API.Areas.HelpPage.ModelDescriptions
 {
     public class CollectionModelDescription : ModelDescription
     {

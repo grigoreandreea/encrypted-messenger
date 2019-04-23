@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EncryptedMessageApp.API
+namespace EncryptedMessengerApp.API
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EncryptedMessengerContext : DbContext
+    public partial class EncryptedMessengerEntities : DbContext
     {
-        public EncryptedMessengerContext()
-            : base("name=EncryptedMessengerContext")
+        public EncryptedMessengerEntities()
+            : base("name=EncryptedMessengerEntities")
         {
         }
     

@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace EncryptedMessageApp.API.Areas.HelpPage.ModelDescriptions
+namespace EncryptedMessengerApp.API.Areas.HelpPage.ModelDescriptions
 {
     public class ComplexTypeModelDescription : ModelDescription
     {

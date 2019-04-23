@@ -1,6 +1,6 @@
 using System;
 
-namespace EncryptedMessageApp.API.Areas.HelpPage.ModelDescriptions
+namespace EncryptedMessengerApp.API.Areas.HelpPage.ModelDescriptions
 {
     public class ParameterAnnotation
     {
