@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import './Register.css'
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
+import axios from 'axios';
+import moment from 'moment';
 
 const styles = theme => ({
     container: {
@@ -23,7 +25,7 @@ const styles = theme => ({
     },
 });
 
-class Login extends React.Component {
+class Register extends React.Component {
 
     constructor(props) {
         super(props);
@@ -40,7 +42,6 @@ class Login extends React.Component {
 
     render() {
         const {classes} = this.props;
-        console.log('state changed: ', this.state)
         return (
             <div className="register-wrapper">
                 <div className="margin-auto">
@@ -155,7 +156,19 @@ class Login extends React.Component {
                     <Button variant="contained"
                             color="primary"
                             style={{marginTop: 24, width: 270, backgroundColor: 'cornflowerblue', marginLeft: 8}}
-                            size="large">
+                            size="large"
+                            onClick={() => {
+                                const url = `http://localhost:62421/api/users`;
+                                const body = JSON.parse(JSON.stringify(this.state));
+                                body.birthDate = moment(body.birthDate).format();
+                                delete body.confirmPassword;
+                                axios.post(url, body)
+                                    .then(response => {
+                                        console.log('FROM server: ')
+                                        console.log(response)
+                                    })
+                            }}
+                    >
                         REGISTER
                     </Button>
                 </div>
@@ -171,8 +184,8 @@ class Login extends React.Component {
     }
 }
 
-Login.propTypes = {
+Register.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(Register);
