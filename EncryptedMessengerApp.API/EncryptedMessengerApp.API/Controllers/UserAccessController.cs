@@ -49,16 +49,8 @@ namespace EncryptedMessengerApp.API.Controllers
         }
         
         // POST: api/login/Logout + header with GUID & user Id
-        public IHttpActionResult Logout()
+        public IHttpActionResult Logout(string authenticationToken)
         {
-            string authenticationToken;
-            CookieHeaderValue cookie = Request.Headers.GetCookies("authentication-token").FirstOrDefault();
-            if (cookie != null)
-            {
-                authenticationToken = cookie["authentication-token"].Value;
-            }
-            else
-                return BadRequest();
 
             AuthenticationToken token = db.AuthenticationTokens.FirstOrDefault(a => a.GUID == authenticationToken);
             if (token == null)
