@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import {Link} from "react-router-dom";
 import './NavBar.css';
+import { tokenIsValid, getCookie } from '../cookieParser';
 
 const styles = {
   root: {
@@ -25,6 +25,19 @@ const styles = {
 
 function ButtonAppBar(props) {
   const { classes } = props;
+  console.log(tokenIsValid());
+  const loginPlace = tokenIsValid()
+    ? (
+      <Button color="inherit" onClick={() => {window.location.pathname='/profile';}}>
+              Hello, {getCookie('firstName')} !
+          </Button>
+    )
+    : (
+      <Button color="inherit" onClick={() => {window.location.pathname='/login';}}>
+              Login
+          </Button>
+    )
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -40,9 +53,7 @@ function ButtonAppBar(props) {
               Encrypted Messenger
             </div>
           </Typography>
-          <Button color="inherit" onClick={() => {window.location.pathname='/login';}}>
-              Login
-          </Button>
+          {loginPlace}
         </Toolbar>
       </AppBar>
     </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Login from "./Login/Login";
 import Register from "./Register/Register";
+import Profile from "./Profile/Profile";
 
 class Routes extends Component {
     render() {
@@ -13,6 +14,7 @@ class Routes extends Component {
                 }/>
                 <Route path="/login" exact strict component={Login}/>
                 <Route path="/register" exact strict component={Register}/>
+                <Route path="/profile" exact strict component={Profile}/>
             </div>
         );
     }

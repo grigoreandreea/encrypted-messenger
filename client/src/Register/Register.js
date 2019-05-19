@@ -81,7 +81,6 @@ class Register extends React.Component {
 
         return (
             <ValidatorForm className="register-wrapper" onSubmit={(event) => {
-                console.log(event);
                 event.preventDefault();
                 const url = `http://localhost:62421/api/users`;
                 const body = JSON.parse(JSON.stringify(this.state));

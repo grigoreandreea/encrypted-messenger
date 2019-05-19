@@ -16,20 +16,22 @@ namespace EncryptedMessengerApp.API.Controllers
         private EncryptedMessengerEntities db = new EncryptedMessengerEntities();
 
         // POST: api/login/Login + PhoneNo & Password
-        public HttpResponseMessage Login(UserLoginModel userLogin)
+        public IHttpActionResult Login(UserLoginModel userLogin)
         {
             HttpResponseMessage response = new HttpResponseMessage();
 
             if (!ModelState.IsValid)
             {
                 response.StatusCode = HttpStatusCode.BadRequest;
-                return response;
+                return BadRequest();
             }
 
             AuthenticationToken token = new AuthenticationToken();
+            var user = db.Users.FirstOrDefault(u => u.PhoneNumber == userLogin.PhoneNumber);
+
             try
             {
-                if (db.Users.FirstOrDefault(u => u.PhoneNumber == userLogin.PhoneNumber) != null)
+                if (user != null && user.Password == userLogin.Password)
                 {
                     response.StatusCode = HttpStatusCode.OK;
                     token.GUID = Guid.NewGuid().ToString();
@@ -41,25 +43,17 @@ namespace EncryptedMessengerApp.API.Controllers
                 }
                 else
                 {
-                    response.StatusCode = HttpStatusCode.BadRequest;
-                    return response;
+                    return NotFound();
                 }
             }
             catch (Exception ex)
             {
-                response.StatusCode = HttpStatusCode.BadRequest;
-                return response;
+                return BadRequest();
             }
 
-            CookieHeaderValue cookie = new CookieHeaderValue("authentication-token", token.GUID);
-            cookie.Expires = DateTimeOffset.Now.AddDays(1);
-            cookie.Domain = Request.RequestUri.Host;
-            cookie.Path = "/";
-
-            response.Headers.AddCookies(new CookieHeaderValue[] { cookie });
-            return response;
+            return Ok(new { token= token.GUID, expireDate= token.ExpireDate, firstName= user.FirstName});
         }
-
+        
         // POST: api/login/Logout + header with GUID & user Id
         public HttpResponseMessage Logout()
         {
@@ -100,12 +94,6 @@ namespace EncryptedMessengerApp.API.Controllers
             }
             response.StatusCode = HttpStatusCode.OK;
             return response;
-        }
-
-        // POST: api/login/Test
-        public bool Test()
-        {
-            return true;
         }
     }
 }
