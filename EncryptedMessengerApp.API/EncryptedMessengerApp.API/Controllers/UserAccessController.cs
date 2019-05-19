@@ -49,10 +49,11 @@ namespace EncryptedMessengerApp.API.Controllers
         }
         
         // POST: api/login/Logout + header with GUID & user Id
-        public IHttpActionResult Logout(string authenticationToken)
+        [HttpGet]
+        public IHttpActionResult Logout(Guid id)
         {
 
-            AuthenticationToken token = db.AuthenticationTokens.FirstOrDefault(a => a.GUID == authenticationToken);
+            AuthenticationToken token = db.AuthenticationTokens.FirstOrDefault(a => a.GUID == id.ToString());
             if (token == null)
             {
                 return NotFound();

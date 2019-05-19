@@ -5,6 +5,7 @@ import Register from "./Register/Register";
 import Profile from "./Profile/Profile";
 
 class Routes extends Component {
+
     render() {
         return (
             <div>
