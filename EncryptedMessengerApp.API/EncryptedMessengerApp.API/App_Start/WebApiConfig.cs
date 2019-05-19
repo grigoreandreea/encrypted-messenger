@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EncryptedMessengerApp.API.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -14,6 +15,12 @@ namespace EncryptedMessengerApp.API
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "Login",
+                routeTemplate: "api/login/{action}/{id}",
+                defaults: new { controller = "UserAccess", id = RouteParameter.Optional }
+            );
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

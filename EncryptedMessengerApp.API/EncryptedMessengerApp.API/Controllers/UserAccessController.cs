@@ -6,13 +6,16 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace EncryptedMessengerApp.API.Controllers
 {
+    [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
     public class UserAccessController : ApiController
     {
         private EncryptedMessengerEntities db = new EncryptedMessengerEntities();
 
+        // POST: api/login/Login + PhoneNo & Password
         public HttpResponseMessage Login(UserLoginModel userLogin)
         {
             HttpResponseMessage response = new HttpResponseMessage();
@@ -57,6 +60,7 @@ namespace EncryptedMessengerApp.API.Controllers
             return response;
         }
 
+        // POST: api/login/Logout + header with GUID & user Id
         public HttpResponseMessage Logout()
         {
             HttpResponseMessage response = new HttpResponseMessage();
@@ -96,6 +100,12 @@ namespace EncryptedMessengerApp.API.Controllers
             }
             response.StatusCode = HttpStatusCode.OK;
             return response;
+        }
+
+        // POST: api/login/Test
+        public bool Test()
+        {
+            return true;
         }
     }
 }
