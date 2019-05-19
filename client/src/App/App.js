@@ -3,10 +3,19 @@ import NavBar from '../NavBar/NavBar';
 import './App.css';
 import Routes from '../Routes';
 import history from '../history';
+import { tokenIsValid } from '../cookieParser';
 
 class App extends Component {
     constructor(props) {
         super(props);
+    }
+    
+    componentDidMount() {
+        if (!tokenIsValid()) {
+            if (window.location.pathname !== "/" && window.location.pathname !== "/register" && window.location.pathname !== "/login") {
+                window.location.pathname = "/login";
+            }
+        }
     }
 
     render() {

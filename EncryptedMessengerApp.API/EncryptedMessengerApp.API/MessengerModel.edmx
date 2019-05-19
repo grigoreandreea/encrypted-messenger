@@ -4,7 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EncryptedMessengerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EncryptedMessengerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AuthenticationTokens">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ExpireDate" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="LoggedOut" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="GroupMembers">
           <Key>
             <PropertyRef Name="IdGroup" />
@@ -51,6 +60,18 @@
           <Property Name="IdUserSent" Type="int" Nullable="false" />
           <Property Name="IdUserReceived" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_AuthenticationTokens_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AuthenticationTokens" Type="Self.AuthenticationTokens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AuthenticationTokens">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GroupMembers_Groups">
           <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
           <End Role="GroupMembers" Type="Self.GroupMembers" Multiplicity="*" />
@@ -136,11 +157,16 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EncryptedMessengerModelStoreContainer">
+          <EntitySet Name="AuthenticationTokens" EntityType="Self.AuthenticationTokens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupMembers" EntityType="Self.GroupMembers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersContacts" EntityType="Self.UsersContacts" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AuthenticationTokens_Users" Association="Self.FK_AuthenticationTokens_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AuthenticationTokens" EntitySet="AuthenticationTokens" />
+          </AssociationSet>
           <AssociationSet Name="FK_GroupMembers_Groups" Association="Self.FK_GroupMembers_Groups">
             <End Role="Groups" EntitySet="Groups" />
             <End Role="GroupMembers" EntitySet="GroupMembers" />
@@ -170,8 +196,7 @@
             <End Role="UsersContacts" EntitySet="UsersContacts" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EncryptedMessengerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -214,6 +239,7 @@
           <NavigationProperty Name="Groups" Relationship="Self.GroupMembers" FromRole="Users" ToRole="Groups" />
           <NavigationProperty Name="Users1" Relationship="Self.UsersContacts" FromRole="Users" ToRole="Users1" />
           <NavigationProperty Name="Users" Relationship="Self.UsersContacts" FromRole="Users1" ToRole="Users" />
+          <NavigationProperty Name="AuthenticationTokens" Relationship="EncryptedMessengerModel.FK_AuthenticationTokens_Users" FromRole="User" ToRole="AuthenticationToken" />
         </EntityType>
         <Association Name="FK_Messages_Groups">
           <End Role="Groups" Type="Self.Group" Multiplicity="0..1" />
@@ -283,7 +309,34 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Users1" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="AuthenticationTokens" EntityType="EncryptedMessengerModel.AuthenticationToken" />
+          <AssociationSet Name="FK_AuthenticationTokens_Users" Association="EncryptedMessengerModel.FK_AuthenticationTokens_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AuthenticationToken" EntitySet="AuthenticationTokens" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AuthenticationToken">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ExpireDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="LoggedOut" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="EncryptedMessengerModel.FK_AuthenticationTokens_Users" FromRole="AuthenticationToken" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_AuthenticationTokens_Users">
+          <End Type="EncryptedMessengerModel.User" Role="User" Multiplicity="1" />
+          <End Type="EncryptedMessengerModel.AuthenticationToken" Role="AuthenticationToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AuthenticationToken">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -339,6 +392,16 @@
               <ScalarProperty Name="Id" ColumnName="IdUserReceived" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="AuthenticationTokens">
+            <EntityTypeMapping TypeName="EncryptedMessengerModel.AuthenticationToken">
+              <MappingFragment StoreEntitySet="AuthenticationTokens">
+                <ScalarProperty Name="LoggedOut" ColumnName="LoggedOut" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
