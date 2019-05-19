@@ -28,5 +28,6 @@ namespace EncryptedMessengerApp.API
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<AuthenticationToken> AuthenticationTokens { get; set; }
     }
 }

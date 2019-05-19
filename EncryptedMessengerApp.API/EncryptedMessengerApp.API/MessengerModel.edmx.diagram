@@ -13,6 +13,8 @@
         <AssociationConnector Association="EncryptedMessengerModel.FK_Messages_Users1" ManuallyRouted="false" />
         <AssociationConnector Association="EncryptedMessengerModel.GroupMembers" ManuallyRouted="false" />
         <AssociationConnector Association="EncryptedMessengerModel.UsersContacts" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EncryptedMessengerModel.AuthenticationToken" Width="1.5" PointX="5.625" PointY="9.125" />
+        <AssociationConnector Association="EncryptedMessengerModel.FK_AuthenticationTokens_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
