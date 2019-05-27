@@ -4,6 +4,7 @@
 /EncryptedMessengerApp.API/.vs
 /EncryptedMessengerApp.API/EncryptedMessengerApp.API/bin
 /EncryptedMessengerApp.API/EncryptedMessengerApp.API/obj
+/EncryptedMessengerApp.API/packages
 /client/node_modules
 /.pnp
 .pnp.js
