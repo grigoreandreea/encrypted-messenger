@@ -9,7 +9,7 @@ export default class Messenger extends React.Component {
         
         this.state = {
             text: '',
-            message: '',
+            message: {},
             messages: [],
             hubConnection: null
         };
@@ -21,7 +21,7 @@ export default class Messenger extends React.Component {
             .build();
         
         connection.on("ReceiveMessage", message => {
-            this.setState({message})
+            this.setState({message: JSON.parse(message)})
         });
         
         connection.start({withCredentials: true})
@@ -36,8 +36,6 @@ export default class Messenger extends React.Component {
       render() {
         return (
           <div>
-                 Message from server: {this.state.message}
-
                 <TextField value={this.state.text}
                            onChange={(ev) => {
                                 this.setState({
@@ -48,11 +46,13 @@ export default class Messenger extends React.Component {
 
                 <Button onClick={() => {
                     this.state.hubConnection
-                        .invoke('SendMessage', 8, null, null, this.state.message, new Date())
+                        .invoke('SendMessage', 8, 7, null, this.state.text, new Date())
                         .catch((e) => {
                             console.log('click', e)
                         })
                 }}>Send message</Button>
+
+                <div>Message from server: {this.state.message.Content}</div>
           </div>
         );
       }

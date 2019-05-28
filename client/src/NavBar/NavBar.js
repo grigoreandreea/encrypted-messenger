@@ -58,20 +58,20 @@ class ButtonAppBar extends React.Component {
               this.setState({ anchorEl: null });
             }}
           >
-          <MenuItem onClick={() => {window.location.pathname='/profile';}}>Profile</MenuItem>
+          <MenuItem onClick={() => {history.push('/profile')}}>Profile</MenuItem>
           <MenuItem onClick={() => {
             const url = `http://localhost:62421/api/login/Logout/${getCookie('token')}`;
             axios.get(url)
                 .then(() => {
                   document.cookie = "expireDate= ''";
-                  window.location.pathname='/'
+                  window.location.pathname = '/';
                 });
           }}>Logout</MenuItem>
         </Menu>
         </React.Fragment>
       )
       : (
-        <Button color="inherit" onClick={() => {window.location.pathname='/login';}}>
+        <Button color="inherit" onClick={() => {history.push('/login');}}>
                 Login
         </Button>
       )
@@ -89,8 +89,8 @@ class ButtonAppBar extends React.Component {
               <div style={{cursor: 'pointer', padding: '0 12px', width: 200, margin: 'auto'}}
                   onClick={() => {
                     tokenIsValid() 
-                      ? window.location.pathname='/messenger'
-                      : window.location.pathname='/';
+                      ? history.push('/messenger')
+                      : history.push('/');
                     }}>
                 Encrypted Messenger
               </div>

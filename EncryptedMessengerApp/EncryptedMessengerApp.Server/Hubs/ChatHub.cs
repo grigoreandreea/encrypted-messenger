@@ -14,8 +14,6 @@ namespace EncryptedMessengerApp.Server.Hubs
         private readonly HttpClient client = new HttpClient();
         public async Task SendMessage(int idUserSent, int? idUserReceived, int? idGroupReceived, string content, DateTime sentDate)
         {
-            await Clients.All.SendAsync("ReceiveMessage", idUserSent, idUserReceived, idGroupReceived, content, sentDate);
-
             Dictionary<string, string> values = new Dictionary<string, string>();
             values.Add("IdUserSent", idUserSent.ToString());
             values.Add("IdUserReceived", idUserReceived.HasValue ? idUserReceived.ToString() : null);
@@ -24,8 +22,17 @@ namespace EncryptedMessengerApp.Server.Hubs
             values.Add("SentDate", sentDate.ToString("yyyy-MM-dd hh:mm:ss"));
 
             string message = "{";
-            message += values.Select(d => string.Format("\"{0}\": {1}", d.Key, string.Join(",", d.Value)));
+
+            foreach (var val in values)
+            {
+                message += $"\"{val.Key}\": \"{val.Value}\",";
+            }
+
+            message = message.Remove(message.Length - 1);
+
             message += "}";
+
+            await Clients.All.SendAsync("ReceiveMessage", message);
 
             HttpContent httpContent = new StringContent(message, Encoding.UTF8, "application/json");
             await client.PostAsync(ApiURL, httpContent);

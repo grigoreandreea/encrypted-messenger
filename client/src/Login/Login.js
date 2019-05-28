@@ -47,7 +47,7 @@ class Login extends React.Component {
         if(this.state.submitted) {
             setTimeout(() => {
                 if(!this.state.wrongCredentials) {
-                    window.location.pathname='/profile'
+                    window.location.pathname = '/profile';
                 } else {
                     this.setState({
                         submitted: false
