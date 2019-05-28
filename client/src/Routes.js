@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Login from "./Login/Login";
 import Register from "./Register/Register";
-<<<<<<< Updated upstream
 import Profile from "./Profile/Profile";
-=======
 import Contacts from './Contacts/contacts';
->>>>>>> Stashed changes
 
 class Routes extends Component {
 

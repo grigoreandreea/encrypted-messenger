@@ -1,6 +1,5 @@
 import React from 'react';
 import './contacts.css'
-import logo from './logo.png';
 
 export default class Contacts extends React.Component{
 
