@@ -39,7 +39,6 @@ class ButtonAppBar extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(tokenIsValid());
     const loginPlace = tokenIsValid()
       ? (
         <React.Fragment>
@@ -88,7 +87,11 @@ class ButtonAppBar extends React.Component {
                         color="inherit"
                         className={classes.grow}>
               <div style={{cursor: 'pointer', padding: '0 12px', width: 200, margin: 'auto'}}
-                  onClick={() => {window.location.pathname='/';}}>
+                  onClick={() => {
+                    tokenIsValid() 
+                      ? window.location.pathname='/messenger'
+                      : window.location.pathname='/';
+                    }}>
                 Encrypted Messenger
               </div>
             </Typography>
