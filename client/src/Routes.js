@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import Login from "./Login/Login";
 import Register from "./Register/Register";
 import Profile from "./Profile/Profile";
+import Contacts from './Contacts/contacts';
 import Messenger from "./Messenger/Messenger";
 
 class Routes extends Component {
@@ -15,6 +16,7 @@ class Routes extends Component {
                         return (<h1>Welcome aboard! <a href="/login" style={{textDecoration: 'none', color: 'white'}}>Login to get started!</a></h1>)}
                 }/>
                 <Route path="/login" exact strict component={Login}/>
+                <Route path="/contacts" exact strict component={Contacts}/>
                 <Route path="/register" exact strict component={Register}/>
                 <Route path="/profile" exact strict component={Profile}/>
                 <Route path="/messenger" exact strict component={Messenger}/>

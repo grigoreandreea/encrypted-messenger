@@ -108,3 +108,4 @@ ButtonAppBar.propTypes = {
 };
 
 export default withStyles(styles)(ButtonAppBar);
+
