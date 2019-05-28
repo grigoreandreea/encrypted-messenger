@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Login from "./Login/Login";
 import Register from "./Register/Register";
+<<<<<<< Updated upstream
 import Profile from "./Profile/Profile";
+=======
+import Contacts from './Contacts/contacts';
+>>>>>>> Stashed changes
 
 class Routes extends Component {
 
@@ -14,6 +18,7 @@ class Routes extends Component {
                         return (<h1>Welcome aboard!</h1>)}
                 }/>
                 <Route path="/login" exact strict component={Login}/>
+                <Route path="/contacts" exact strict component={Contacts}/>
                 <Route path="/register" exact strict component={Register}/>
                 <Route path="/profile" exact strict component={Profile}/>
             </div>

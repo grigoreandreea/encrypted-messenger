@@ -27,6 +27,7 @@ const styles = {
   },
 };
 
+<<<<<<< Updated upstream
 class ButtonAppBar extends React.Component {
 
   constructor(props) {
@@ -50,6 +51,27 @@ class ButtonAppBar extends React.Component {
                     this.setState({ anchorEl: ev.currentTarget });
                   }}>
                   Hello, {getCookie('firstName')} !
+=======
+function ButtonAppBar(props) {
+  const { classes } = props;
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar style={{backgroundColor:"cornflowerblue"}}>
+          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+            <MenuIcon style={{color: 'black'}} />
+          </IconButton>
+          <Typography variant="h6"
+                      color="inherit"
+                      className={classes.grow}>
+            <div style={{cursor: 'pointer', padding: '0 12px', width: 200, margin: 'auto'}}
+                onClick={() => {window.location.pathname='/';}}>
+              Encrypted Messenger
+            </div>
+          </Typography>
+          <Button color="inherit" onClick={() => {window.location='/Login';}}>
+              Login
+>>>>>>> Stashed changes
           </Button>
           <Menu
             id="simple-menu"
