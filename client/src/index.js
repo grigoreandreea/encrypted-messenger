@@ -5,6 +5,7 @@ import App from './App/App';
 import * as serviceWorker from './serviceWorker';
 import history from "./history";
 import {Router} from "react-router-dom";
+var signalR;
 
 ReactDOM.render(
     <Router history={history}>
