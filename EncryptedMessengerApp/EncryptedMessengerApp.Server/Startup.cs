@@ -52,6 +52,16 @@ namespace EncryptedMessengerApp.Server
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .WithMethods("GET", "POST", "HEAD", "PUT")
+                    .AllowCredentials();
+            });
+
+
+
             app.UseSignalR(routes =>
             {
                 routes.MapHub<ChatHub>("/chatHub");
