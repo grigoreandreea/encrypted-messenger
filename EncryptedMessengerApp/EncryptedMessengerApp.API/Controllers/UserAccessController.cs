@@ -2,11 +2,10 @@
 using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace EncryptedMessengerApp.API.Controllers
 {
@@ -14,6 +13,7 @@ namespace EncryptedMessengerApp.API.Controllers
     public class UserAccessController : ApiController
     {
         private EncryptedMessengerEntities db = new EncryptedMessengerEntities();
+        private SHA256 sha256Hash = SHA256.Create();
 
         // POST: api/login/Login + PhoneNo & Password
         public IHttpActionResult Login(UserLoginModel userLogin)
@@ -26,7 +26,7 @@ namespace EncryptedMessengerApp.API.Controllers
 
             try
             {
-                if (user != null && user.Password == userLogin.Password)
+                if (user != null && user.Password == Encoding.UTF8.GetString(sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(userLogin.Password))))
                 {
                     token.GUID = Guid.NewGuid().ToString();
                     token.ExpireDate = DateTime.Now.AddDays(1);
