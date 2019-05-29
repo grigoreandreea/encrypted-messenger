@@ -45,7 +45,13 @@ namespace EncryptedMessengerApp.API.Controllers
                 return BadRequest();
             }
 
-            return Ok(new { token= token.GUID, expireDate= token.ExpireDate, firstName= user.FirstName});
+            return Ok(new {
+                token = token.GUID,
+                expireDate = token.ExpireDate,
+                firstName = user.FirstName,
+                lastName = user.LastName,
+                userId = user.Id
+            });
         }
         
         // POST: api/login/Logout + header with GUID & user Id
