@@ -47,7 +47,7 @@ class Login extends React.Component {
         if(this.state.submitted) {
             setTimeout(() => {
                 if(!this.state.wrongCredentials) {
-                    window.location.pathname='/profile'
+                    window.location.pathname = '/profile';
                 } else {
                     this.setState({
                         submitted: false
@@ -118,6 +118,8 @@ class Login extends React.Component {
                                         document.cookie = `token=${response.data.token}`;
                                         document.cookie = `expireDate=${response.data.expireDate}`;
                                         document.cookie = `firstName=${response.data.firstName}`;
+                                        document.cookie = `lastName=${response.data.lastName}`;
+                                        document.cookie = `userId=${response.data.userId}`;
                                         this.setState({
                                             submitted: true
                                         })
