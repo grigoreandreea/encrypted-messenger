@@ -25,7 +25,7 @@ namespace EncryptedMessengerApp.API
             );
 
             config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
-     = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
+     = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling
                  = Newtonsoft.Json.PreserveReferencesHandling.Objects;
         }
