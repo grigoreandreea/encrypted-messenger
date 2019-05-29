@@ -1,0 +1,41 @@
+.Profile {
+    text-align: center;
+    color:black;
+    font-weight: bold;
+
+    width: 1000px;
+    height: 500px;
+    padding: 50px;
+    margin: 20px;
+    border: 2px solid darkslategray;
+    box-sizing: border-box;
+    display: block;
+    background: #9FD0B7;
+  }
+  .header{
+    border: 2px solid darkslategray;
+    font-size: large;
+    box-sizing: border-box;
+    display: block;
+    padding: 30px;  
+    font-weight: bold;
+    background: gray;}
+  .title {
+    color:black;
+    font-size: 18px;
+  }
+  .left {
+    height:200px;
+    left: 450px;
+  }
+  
+  .right {
+    right: 500px;
+    height:200px;
+  }
+
+  
+  .bottom {
+    position: absolute;
+    bottom: 25px;
+  }
