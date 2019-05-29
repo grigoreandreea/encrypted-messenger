@@ -16,10 +16,9 @@ class Routes extends Component {
                         return (<h1>Welcome aboard! <Link to="/login" style={{textDecoration: 'none', color: '#7d8eb4'}}>Login to get started!</Link></h1>)}
                 }/>
                 <Route path="/login" exact strict component={Login}/>
-                <Route path="/contacts" exact strict component={Contacts}/>
                 <Route path="/register" exact strict component={Register}/>
                 <Route path="/profile" exact strict component={Profile}/>
-                <Route path="/messenger" exact strict component={Messenger}/>
+                <Route path="/messenger" exact strict component={Contacts}/>
             </div>
         );
     }

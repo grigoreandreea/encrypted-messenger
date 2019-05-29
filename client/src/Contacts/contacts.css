@@ -16,8 +16,8 @@ body,html{
 }
 
 .app-messenger{
-    /*display: flex;*/
-    /*flex-direction: column;*/
+    display: flex;
+    flex-direction: column;
     margin: none;
     padding: 0;
     width:70em;
@@ -101,4 +101,18 @@ body,html{
     overflow-y: scroll;
     overflow-x: none;
     /**/
+}
+
+.add-text {
+
+}
+
+.right-message {
+    align-self: flex-end;
+    margin: 4px 0;
+}
+
+.left-message {
+    align-self: flex-start;
+    margin: 4px 0;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, TextField } from '@material-ui/core'
+import { tokenIsValid, getCookie } from '../cookieParser';
 const signalR = require("@aspnet/signalr");
 
 export default class Messenger extends React.Component {
@@ -21,7 +22,9 @@ export default class Messenger extends React.Component {
             .build();
         
         connection.on("ReceiveMessage", message => {
-            this.setState({message: JSON.parse(message)})
+            const parsedMessage = JSON.parse(message)
+            this.setState({message: parsedMessage})
+            this.props.newMessageReceived(parsedMessage);
         });
         
         connection.start({withCredentials: true})
@@ -36,7 +39,23 @@ export default class Messenger extends React.Component {
       render() {
         return (
           <div>
-                <TextField value={this.state.text}
+                <TextField style={{width: 'calc(100% - 142px)'}}
+                           value={this.state.text}
+                           variant='outlined' 
+                           onKeyPress={(ev) => {
+                            if (ev.key === 'Enter') {
+                                if (tokenIsValid()) {
+                                    this.state.hubConnection
+                                        .invoke('SendMessage', getCookie('userId'), getCookie('userId') == 8 ? 7 : 8, null, this.state.text, new Date())
+                                        .catch((e) => {
+                                            console.log('click', e)
+                                    });
+                                    this.setState({
+                                        text: ''
+                                    })
+                                }
+                            }
+                           }}
                            onChange={(ev) => {
                                 this.setState({
                                     text: ev.target.value
@@ -44,15 +63,23 @@ export default class Messenger extends React.Component {
                             }}
                 />
 
-                <Button onClick={() => {
-                    this.state.hubConnection
-                        .invoke('SendMessage', 8, 7, null, this.state.text, new Date())
-                        .catch((e) => {
-                            console.log('click', e)
-                        })
+                <Button style={{marginTop: 8, marginLeft: 4}}
+                        color='primary'
+                        variant='outlined'
+                        onClick={() => {
+                            if (tokenIsValid()) {
+                                this.state.hubConnection
+                                    .invoke('SendMessage', getCookie('userId'), getCookie('userId') == 8 ? 7 : 8, null, this.state.text, new Date())
+                                    .catch((e) => {
+                                        console.log('click', e)
+                                });
+                                this.setState({
+                                    text: ''
+                                })
+                            }
                 }}>Send message</Button>
 
-                <div>Message from server: {this.state.message.Content}</div>
+                {/* <div>Message from server: {this.state.message.Content}</div> */}
           </div>
         );
       }
