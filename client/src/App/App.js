@@ -12,26 +12,20 @@ class App extends Component {
     
     componentDidMount() {
         if (!tokenIsValid()) {
-            if (window.location.pathname !== "/" && window.location.pathname !== "/register" && window.location.pathname !== "/login") {
-                window.location.pathname = "/login";
+            if (history.location.pathname !== "/" && history.location.pathname !== "/register" && history.location.pathname !== "/login") {
+                history.push("/login");
             }
         }
     }
 
     render() {
-        const backgrounColorClassName = history.location.pathname === '/login' || history.location.pathname === '/register'
-            ? 'App-light-background'
-            : 'App-dark-background';
-        const footerColorClassName = history.location.pathname === '/login' || history.location.pathname === '/register'
-            ? 'App-light-color'
-            : 'App-dark-color';
         return (
-            <div className={'App ' + backgrounColorClassName}>
+            <div className={'App-light-background'}>
                 <NavBar/>
-                <div className={'App-header ' + backgrounColorClassName}>
+                <div className={'App-header App-light-color'}>
                     <Routes/>
                 </div>
-                <footer className={'App-footer ' + footerColorClassName}>
+                <footer className={'App-footer App-light-color'}>
                     <aside>Copyright &copy; Encrypted Systems &amp; Co 2019</aside>
                 </footer>
             </div>

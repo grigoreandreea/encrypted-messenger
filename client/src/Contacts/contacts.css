@@ -1,0 +1,118 @@
+/*.app-messenger{
+    display: flex;
+    flex-direction: column;
+}*/
+@import "https://fonts.googleapis.com/css?family=Open+Sans:400,600";
+
+body,html{
+    padding:0;
+    margin: 0;
+    height:100%;
+    font-family: 'Open-Sans',sans-serif;
+}
+
+*{
+    padding: 0;
+}
+
+.app-messenger{
+    display: flex;
+    flex-direction: column;
+    margin: none;
+    padding: 0;
+    width:70em;
+    box-shadow: 6px 6px 3px rgba(255, 255, 255, 0.5);
+}
+.left{
+    background-color: white;
+    float: left;
+    border-right:1px solid rgba(0,0,0,0.3);
+    height: 500px;
+    width: 20%;;
+}
+
+.contactsTitle{
+    /*background-color: green;*/
+    border-bottom:1px solid rgba(0,0,0,0.3);
+    color:black;
+    height:7%;
+}
+
+.actualContacts{
+    overflow-y: scroll;
+    overflow-x: none;
+    padding: 0;
+    margin:0;;
+    height:90%;
+}
+
+
+.oneContact{
+    padding:0;
+    margin:0;
+    display: flex;
+    border-bottom:1px solid rgba(0,0,0,0.3);
+}
+
+.user-image{
+    margin:0;
+    padding:0;
+    margin-top: 7px;
+    margin-bottom: 5px;
+    width:50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+
+.user-info{
+    color:black;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.user-info h2{
+    margin-top:20px;
+    padding-left: 10px;
+}
+
+.user-info p{
+    padding-left: 22px;
+}
+
+
+.content{
+    /*display: flex;*/
+    background-color: white;
+    height:500px;
+    color:black; 
+}
+
+.messengerTitle{
+   /* background-color: green;*/
+    border-bottom:1px solid rgba(0,0,0,0.3);
+    height:7%;
+}
+
+.actualMessenger{
+    /**/
+    /*schimba daca vrei*/
+    overflow-y: scroll;
+    overflow-x: none;
+    /**/
+}
+
+.add-text {
+
+}
+
+.right-message {
+    align-self: flex-end;
+    margin: 4px 0;
+}
+
+.left-message {
+    align-self: flex-start;
+    margin: 4px 0;
+}
