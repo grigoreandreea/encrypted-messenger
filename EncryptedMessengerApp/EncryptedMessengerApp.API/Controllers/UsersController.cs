@@ -5,6 +5,8 @@ using System.Net;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace EncryptedMessengerApp.API.Controllers
 {
@@ -12,6 +14,7 @@ namespace EncryptedMessengerApp.API.Controllers
     public class UsersController : ApiController
     {
         private EncryptedMessengerEntities db = new EncryptedMessengerEntities();
+        private SHA256 sha256Hash = SHA256.Create();
 
         // GET: api/Users
         public IQueryable<User> GetUsers()
@@ -50,6 +53,7 @@ namespace EncryptedMessengerApp.API.Controllers
 
             try
             {
+                user.Password = Encoding.UTF8.GetString(sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(user.Password)));
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
@@ -75,7 +79,7 @@ namespace EncryptedMessengerApp.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            user.Password = System.Text.Encoding.UTF8.GetString(sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(user.Password)));
             db.Users.Add(user);
             db.SaveChanges();
 
